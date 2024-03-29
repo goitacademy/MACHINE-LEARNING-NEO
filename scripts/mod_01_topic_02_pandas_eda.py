@@ -149,4 +149,4 @@ titanic.pivot_table('survived', ['sex', age], [fare, 'class'],  observed=True)
 
 
 report = ProfileReport(titanic, title='Titanic')
-report.to_file('../derived/n01_02_titanic_report.html')
+report.to_file('../derived/mod_01_topic_02_titanic_report.html')

@@ -12,7 +12,7 @@ from sklearn.decomposition import PCA
 
 # %%
 
-with open('../datasets/filename.pkl', 'rb') as fl:
+with open('../datasets/mod_06_topic_12_nci_data.pkl', 'rb') as fl:
     data_dict = pickle.load(fl)
 
 data = data_dict['data']

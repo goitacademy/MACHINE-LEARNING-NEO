@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 
 # %%
 
-data = pd.read_csv('../datasets/n04_01_bank_data.csv', sep=';')
+data = pd.read_csv('../datasets/mod_04_topic_07_bank_data.csv', sep=';')
 data.head()
 
 # %%

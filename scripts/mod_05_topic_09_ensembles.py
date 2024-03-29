@@ -18,7 +18,7 @@ from sklearn.metrics import f1_score
 
 # %%
 
-data = pd.read_csv('../datasets/n05_01_employee_data.csv')
+data = pd.read_csv('../datasets/mod_05_topic_09_employee_data.csv')
 data.head()
 
 # %%

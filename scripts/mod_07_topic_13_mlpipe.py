@@ -10,11 +10,12 @@ from sklearn.metrics import root_mean_squared_error
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import TargetEncoder
-from utils import VisRatioEstimator
+from sklearn.utils import estimator_html_repr
+from mod_07_topic_13_mlpipe import VisRatioEstimator
 
 # %%
 
-data = pd.read_csv('../datasets/train_v9rqX0R.csv')
+data = pd.read_csv('../datasets/mod_07_topic_13_bigmart_data.csv')
 data.sample(10, random_state=42)
 
 # %%
@@ -132,7 +133,6 @@ sns.set_theme()
 
 plt.show()
 
-
 # %%
 
 vis_est = VisRatioEstimator()
@@ -173,8 +173,12 @@ model_pipeline = Pipeline(steps=[
         n_jobs=-1,
         random_state=42))])
 
+# %%
 
-with open('../models/model_pipeline.joblib', 'wb') as fl:
+with open('../derived/mod_07_topic_13_mlpipe.html', 'w', encoding='utf-8') as fl:
+    fl.write(estimator_html_repr(model_pipeline))
+
+with open('../models/mod_07_topic_13_mlpipe.joblib', 'wb') as fl:
     joblib.dump(model_pipeline, fl)
 
 # %%
@@ -191,7 +195,7 @@ data.sample(10, random_state=42)
 
 # %%
 
-data.to_pickle('../derived/bigmart.pkl.gz')
+data.to_pickle('../derived/mod_07_topic_13_bigmart_data_upd.pkl.gz')
 
 # %%
 
@@ -223,11 +227,10 @@ cv_results = cross_val_score(
     y=y_train,
     scoring='neg_root_mean_squared_error',
     cv=5,
-    verbose=1,
-    # n_jobs=-1,
-    # random_state=42
-)
+    verbose=1)
 
 rmse_cv = np.abs(cv_results).mean()
 
 print(f"Pipe's RMSE on CV: {rmse_cv:.1f}")
+
+# %%

@@ -10,7 +10,7 @@ from prophet import Prophet
 
 # %%
 
-df = pd.read_csv('../datasets/n02_02_ts_data.csv')
+df = pd.read_csv('../datasets/mod_02_topic_04_ts_data.csv')
 df.head()
 
 # %%

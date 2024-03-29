@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 # %%
 
-data = pd.read_csv('../datasets/n03_01_weather_data.csv.gz')
+data = pd.read_csv('../datasets/mod_03_topic_05_weather_data.csv.gz')
 data.shape
 
 # %%

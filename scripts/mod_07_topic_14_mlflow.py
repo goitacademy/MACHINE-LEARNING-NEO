@@ -1,3 +1,4 @@
+from tempfile import mkdtemp
 import mlflow
 import joblib
 import pandas as pd
@@ -93,8 +94,11 @@ with mlflow.start_run(run_name='rfr'):
 
 # %%
 
+cachedir = mkdtemp()
+
 pipe_upd = Pipeline(steps=pipe_base.steps[:-1] +
-                    [('reg_model', GradientBoostingRegressor(random_state=42))])
+                    [('reg_model', GradientBoostingRegressor(random_state=42))],
+                    memory=cachedir)
 
 # %%
 

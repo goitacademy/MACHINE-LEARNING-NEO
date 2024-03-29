@@ -8,7 +8,7 @@ from imblearn.over_sampling import SMOTE
 
 # %%
 
-data = pd.read_csv('../datasets/n03_02_diabets_data.csv')
+data = pd.read_csv('../datasets/mod_03_topic_06_diabets_data.csv')
 data.head()
 
 # %%
@@ -62,7 +62,7 @@ tree.plot_tree(clf,
                precision=2,
                rounded=True)
 
-plt.savefig('../derived/n03_02_decision_tree.png')
+plt.savefig('../derived/mod_03_topic_06_decision_tree.png')
 plt.show()
 
 # %%
