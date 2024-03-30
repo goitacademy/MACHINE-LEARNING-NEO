@@ -11,7 +11,7 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import TargetEncoder
 from sklearn.utils import estimator_html_repr
-from mod_07_topic_13_mlpipe import VisRatioEstimator
+from mod_07_topic_13_transformer import VisRatioEstimator
 
 # %%
 
