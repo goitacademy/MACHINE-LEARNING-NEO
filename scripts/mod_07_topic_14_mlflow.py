@@ -124,3 +124,13 @@ with mlflow.start_run(run_name='gbr'):
         signature=signature,
         input_example=X.head(),
         registered_model_name='model_upd_tracking')
+
+# %%
+
+# best_run = (mlflow
+#             .search_runs(
+#                 experiment_names=['MLflow Tracking'],
+#                 order_by=['metrics.cv_rmse_score'],
+#                 max_results=1))
+
+# best_run[['tags.Model', 'metrics.cv_rmse_score']]
