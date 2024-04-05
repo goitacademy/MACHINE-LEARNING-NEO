@@ -8,7 +8,7 @@ from sklearn.metrics import accuracy_score, confusion_matrix
 
 # %%
 
-data = pd.read_csv('../datasets/mod_04_topic_02_petfinder_data.csv.gz')
+data = pd.read_csv('../datasets/mod_04_topic_08_petfinder_data.csv.gz')
 data.info()
 
 # %%

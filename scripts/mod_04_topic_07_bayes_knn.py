@@ -79,22 +79,6 @@ X_train, X_test, y_train, y_test = (
 
 # %%
 
-encoder = ce.TargetEncoder()
-
-X_train = encoder.fit_transform(X_train, y_train)
-X_test = encoder.transform(X_test)
-
-X_train.head()
-
-# %%
-
-scaler = StandardScaler().set_output(transform='pandas')
-
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-
-
-# %%
 cat_cols = X_train.select_dtypes(include='object').columns
 cat_cols
 

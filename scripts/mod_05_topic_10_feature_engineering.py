@@ -156,7 +156,7 @@ plt.show()
 
 # %%
 
-sns.relplot(data=autos, x='curb_weight', y='price')
+sns.regplot(data=autos, x='curb_weight', y='price', order=2)
 
 plt.show()
 
