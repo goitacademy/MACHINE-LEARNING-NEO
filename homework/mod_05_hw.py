@@ -1,9 +1,8 @@
-from sklearn.preprocessing import TargetEncoder
-from sklearn.ensemble import RandomForestRegressor
 import pickle
-import numpy as np
 import pandas as pd
 from sklearn.feature_selection import mutual_info_regression
+from sklearn.preprocessing import TargetEncoder
+from sklearn.ensemble import GradientBoostingRegressor
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -46,13 +45,14 @@ mi_scores = (pd.Series(
 # %%
 
 data = autos.copy()
-enc = TargetEncoder(target_type='continuous').set_output(transform='pandas')
+enc = TargetEncoder(target_type='continuous',
+                    random_state=42).set_output(transform='pandas')
 
 data[cat_features] = enc.fit_transform(data[cat_features], y)
 
 # %%
 
-regr = RandomForestRegressor(random_state=42)
+regr = GradientBoostingRegressor(random_state=42)
 regr.fit(data.drop('price', axis=1), y)
 
 # %%
@@ -60,7 +60,7 @@ regr.fit(data.drop('price', axis=1), y)
 rf_scores = pd.Series(
     regr.feature_importances_,
     index=X.columns,
-    name='RF Scores')
+    name='GB Scores')
 
 # %%
 
@@ -73,7 +73,8 @@ scores = pd.concat([rf_scores, mi_scores], axis=1)
 scores = (scores
           .melt(ignore_index=False)
           .reset_index()
-          .sort_values(['variable', 'value'], ascending=[True, False]))
+          .sort_values(['variable', 'value'],
+                       ascending=[False, False]))
 
 # %%
 

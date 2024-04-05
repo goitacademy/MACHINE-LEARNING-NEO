@@ -94,7 +94,7 @@ X_test_cat = cat_imputer.transform(X_test_cat)
 
 # %%
 
-enc_auto = TargetEncoder().set_output(transform='pandas')
+enc_auto = TargetEncoder(random_state=42).set_output(transform='pandas')
 
 X_train_cat = enc_auto.fit_transform(X_train_cat, y_train)
 X_test_cat = enc_auto.transform(X_test_cat)
@@ -149,7 +149,7 @@ data = vis_est.fit_transform(data)
 
 cat_transformer = Pipeline(steps=[
     ('imputer', SimpleImputer(strategy='most_frequent')),
-    ('encoder', TargetEncoder())])
+    ('encoder', TargetEncoder(random_state=42))])
 
 num_transformer = Pipeline(steps=[
     ('imputer', SimpleImputer())])
