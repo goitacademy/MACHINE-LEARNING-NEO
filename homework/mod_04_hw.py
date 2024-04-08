@@ -6,7 +6,7 @@ from sklearn.preprocessing import TargetEncoder, PowerTransformer
 # %%
 
 data = pd.read_csv('../datasets/mod_04_hw_train_data.csv')
-test = pd.read_csv('../datasets/mod_04_hw_test_data.csv')
+test = pd.read_csv('../datasets/mod_04_hw_valid_data.csv')
 
 # %%
 
@@ -57,4 +57,6 @@ test = trn.transform(test)
 
 y_pred = model.predict(test)
 
-mean_absolute_percentage_error(y_true, y_pred)
+mape = mean_absolute_percentage_error(y_true, y_pred)
+
+print(f'Validation MAPE: {mape:.2%}')

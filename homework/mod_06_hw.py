@@ -1,4 +1,3 @@
-from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
 import pickle
 from yellowbrick.cluster import KElbowVisualizer
