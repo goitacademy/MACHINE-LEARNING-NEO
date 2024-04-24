@@ -1,3 +1,4 @@
+import warnings
 import pickle
 import numpy as np
 import pandas as pd
@@ -79,7 +80,12 @@ visualizer = KElbowVisualizer(
     k=(2, 10),
     timings=False)
 
-visualizer.fit(X)
+
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore')
+
+    visualizer.fit(X)
+
 visualizer.show()
 
 
@@ -125,8 +131,11 @@ plt.show()
 
 k_best = visualizer.elbow_value_
 
-model_kmn = KMeans(n_clusters=k_best, random_state=42).fit(X)
-model_agg = AgglomerativeClustering(n_clusters=k_best).fit(X)
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore')
+
+    model_kmn = KMeans(n_clusters=k_best, random_state=42).fit(X)
+    model_agg = AgglomerativeClustering(n_clusters=k_best).fit(X)
 
 labels_kmn = pd.Series(model_kmn.labels_, name='k-means')
 labels_agg = pd.Series(model_agg.labels_, name='h-clust')
