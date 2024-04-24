@@ -1,3 +1,4 @@
+import warnings
 import pandas as pd
 import numpy as np
 from scipy.stats import zscore
@@ -66,7 +67,10 @@ data.select_dtypes(include='object').nunique()
 
 # %%
 
-data['y'] = data['y'].replace({'no': 0, 'yes': 1})
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore')
+
+    data['y'] = data['y'].replace({'no': 0, 'yes': 1})
 
 # %%
 

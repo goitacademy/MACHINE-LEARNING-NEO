@@ -1,3 +1,4 @@
+import warnings
 import numpy as np
 import pandas as pd
 import seaborn as sns
@@ -179,8 +180,12 @@ forecast[['ds', 'yhat', 'yhat_lower', 'yhat_upper']].tail()
 
 # %%
 
-mp.plot_components(forecast)
-mp.plot(forecast)
+
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore')
+
+    mp.plot_components(forecast)
+    mp.plot(forecast)
 
 # %%
 

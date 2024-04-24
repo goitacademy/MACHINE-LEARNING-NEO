@@ -1,4 +1,4 @@
-import pandas as pd
+import warnings
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -19,14 +19,13 @@ california_housing.target.head()
 
 # %%
 
-data = california_housing.frame
-data.isna().sum()
+data = california_housing.frame.info()
 
 # %%
 
-melted = california_housing.frame.melt()
-
 sns.set_theme()
+
+melted = california_housing.frame.melt()
 
 g = sns.FacetGrid(melted,
                   col='variable',
@@ -34,7 +33,10 @@ g = sns.FacetGrid(melted,
                   sharex=False,
                   sharey=False)
 
-g.map(sns.histplot, 'value')
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore')
+
+    g.map(sns.histplot, 'value')
 
 g.set_titles(col_template='{col_name}')
 

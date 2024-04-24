@@ -1,3 +1,4 @@
+import warnings
 import pandas as pd
 import numpy as np
 from sklearn.metrics import ConfusionMatrixDisplay, classification_report
@@ -27,12 +28,14 @@ data.isna().mean().sort_values(ascending=False)
 
 # %%
 
-tmp = (data
-       .groupby('Location')
-       .apply(lambda x:
-              x.drop(['Location', 'Date'], axis=1)
-              .isna()
-              .mean()))
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore')
+    tmp = (data
+           .groupby('Location')
+           .apply(lambda x:
+                  x.drop(['Location', 'Date'], axis=1)
+                  .isna()
+                  .mean()))
 
 plt.figure(figsize=(9, 13))
 

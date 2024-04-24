@@ -1,3 +1,4 @@
+import warnings
 import pandas as pd
 import numpy as np
 import category_encoders as ce
@@ -122,13 +123,15 @@ pet = pd.DataFrame(
 
 pet[num_cols] = kbins.transform(pet[num_cols]).astype(int).astype(str)
 
-prob = (clf
-        .predict_proba(
-            scaler
-            .transform(
-                encoder
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore')
+    prob = (clf
+            .predict_proba(
+                scaler
                 .transform(
-                    pet)))
-        .flatten())
+                    encoder
+                    .transform(
+                        pet)))
+            .flatten())
 
 print(f'This pet has a {prob[1]:.1%} probability "of getting adopted"')

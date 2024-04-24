@@ -1,7 +1,8 @@
-from ydata_profiling import ProfileReport
+import warnings
 import numpy as np
 import pandas as pd
 import seaborn as sns
+from ydata_profiling import ProfileReport
 
 # %%
 
@@ -131,7 +132,7 @@ titanic.groupby('sex')[['survived']].mean()
 
 # %%
 
-titanic.pivot_table('survived', index='sex', columns='class')
+titanic.pivot_table('survived', index='sex', columns='class', observed=True)
 
 # %%
 
@@ -147,6 +148,11 @@ titanic.pivot_table('survived', ['sex', age], [fare, 'class'],  observed=True)
 
 # %%
 
+with warnings.catch_warnings():
+    warnings.simplefilter('ignore')
 
-report = ProfileReport(titanic, title='Titanic')
-report.to_file('../derived/mod_01_topic_02_titanic_report.html')
+    report = ProfileReport(
+        titanic,
+        title='Titanic')
+
+    report.to_file('../derived/mod_01_topic_02_titanic_report.html')

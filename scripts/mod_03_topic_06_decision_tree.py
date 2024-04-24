@@ -92,6 +92,7 @@ print(f'Acc.: {acc:.1%}')
 # %%
 
 plt.figure(figsize=(25, 7))
+
 tree.plot_tree(clf_upd,
                feature_names=X.columns,
                filled=True,
