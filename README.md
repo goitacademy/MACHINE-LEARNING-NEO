@@ -1,4 +1,4 @@
-# MACHINE-LEARNING-NEO
+# Machine Learning: Fundamentals and Applictions
 
 ## Автор курсу
 Володимир Голомб : : [LinkedIn](https://www.linkedin.com/in/vholomb) : : [Medium](https://medium.com/@wldmrgml) : : [GitHub](https://github.com/woldemarg)

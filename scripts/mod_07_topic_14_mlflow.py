@@ -1,12 +1,12 @@
+import warnings
 from tempfile import mkdtemp
 import mlflow
 import joblib
 import pandas as pd
 import numpy as np
 from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import cross_val_score, GridSearchCV
 from sklearn.pipeline import Pipeline
-from sklearn.model_selection import GridSearchCV
 
 # %%
 
@@ -56,10 +56,15 @@ with mlflow.start_run(run_name='rfr'):
     mlflow.log_metric('cv_rmse_score', rmse_cv)
     # Set a tag that we can use to remind ourselves what this run was for
     mlflow.set_tag('Model', 'RandomForest for BigMart')
-    # Infer the model signature
-    signature = mlflow.models.infer_signature(
-        X.head(),
-        model_base.predict(X.head()))
+
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore')
+
+        # Infer the model signature
+        signature = mlflow.models.infer_signature(
+            X.head(),
+            model_base.predict(X.head()))
+
     # Log the model
     model_info = mlflow.sklearn.log_model(
         sk_model=model_base,
@@ -115,9 +120,14 @@ with mlflow.start_run(run_name='gbr'):
     mlflow.log_params(pipe_upd.named_steps['reg_model'].get_params())
     mlflow.log_metric('cv_rmse_score', rmse_cv_upd)
     mlflow.set_tag('Model', 'GradientBoosting model for BigMart')
-    signature = mlflow.models.infer_signature(
-        X.head(),
-        model_upd.predict(X.head()))
+
+    with warnings.catch_warnings():
+        warnings.simplefilter('ignore')
+
+        signature = mlflow.models.infer_signature(
+            X.head(),
+            model_upd.predict(X.head()))
+
     model_info = mlflow.sklearn.log_model(
         sk_model=model_upd,
         artifact_path='model_upd',
