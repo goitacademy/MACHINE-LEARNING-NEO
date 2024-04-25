@@ -232,5 +232,3 @@ cv_results = cross_val_score(
 rmse_cv = np.abs(cv_results).mean()
 
 print(f"Pipe's RMSE on CV: {rmse_cv:.1f}")
-
-# %%
