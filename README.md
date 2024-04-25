@@ -28,11 +28,11 @@
 
 ### Python Version: 3.11.9
 
-### using conda
+### Conda:
 ```sh
 conda env create -f requirements_conda.yml
 ```
-### using pip
+### PIP
 ```sh
 pip install -r requirements_pip.txt
 ```
