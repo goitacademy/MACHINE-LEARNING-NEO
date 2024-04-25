@@ -25,6 +25,14 @@
 ![course mtx](images/mlf_course_mtx.png)
 
 ## Відтворення середовища
+
+### Python Version: 3.11.9
+
+### using conda
 ```sh
-conda env create -f conda_environment.yml
+conda env create -f requirements_conda.yml
+```
+### using pip
+```sh
+pip install -r requirements_pip.txt
 ```
