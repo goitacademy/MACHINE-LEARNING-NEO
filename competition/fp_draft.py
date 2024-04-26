@@ -16,6 +16,11 @@ test = pd.read_csv('fp_valid.csv')
 
 # %%
 
+# data = pd.read_csv('/kaggle/input/{competition_url}/final_proj_data.csv')
+# test = pd.read_csv('/kaggle/input/{competition_url}/final_proj_test.csv')
+
+# %%
+
 target = data.pop('y')
 
 # %%
@@ -65,7 +70,7 @@ submission.to_csv('fp_bench.csv', index=False)
 
 # %%
 
-# from sklearn.metrics import balanced_accuracy_score
+# from sklearn.metrics import balanced_accuracy_score, confusion_matrix
 
 # truth = pd.read_csv('fp_truth.csv')
 # public = truth[truth['Usage'] == 'Public'].index
@@ -105,3 +110,14 @@ submission.to_csv('fp_bench.csv', index=False)
 #     p=target.value_counts(normalize=True).values)
 # balanced_accuracy_score(truth['y'], rnd_2)
 # # 0.49126735935976323
+
+
+# # auto ml
+# from pycaret.classification import ClassificationExperiment
+# se = ClassificationExperiment()
+# se.setup(data, target=target, session_id=42)
+# best = se.compare_models()
+# pred = se.predict_model(best, data=test)
+# balanced_accuracy_score(truth['y'], pred['prediction_label'])
+# # 0.5017283701536702
+
