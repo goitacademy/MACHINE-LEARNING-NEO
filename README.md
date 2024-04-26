@@ -32,7 +32,7 @@
 ```sh
 conda env create -f requirements_conda.yml
 ```
-### PIP
+### PIP:
 ```sh
 pip install -r requirements_pip.txt
 ```
