@@ -1,10 +1,12 @@
-# Machine Learning: Fundamentals and Applictions
+# Machine Learning: Fundamentals and Applications
 
 ## Автор курсу
 Володимир Голомб : : [LinkedIn](https://www.linkedin.com/in/vholomb) : : [Medium](https://medium.com/@wldmrgml) : : [GitHub](https://github.com/woldemarg)
 
 ## Зміст курсу
-| **#** | **Модуль** | **#** | **Тема** | **URL** |
+7 тижнів, 14 занять, 5 практичних ДЗ, фінальний проєкт (Kaggle competition)
+<br>
+| **#** | **Модуль / Тиждень** | **#** | **Тема** | **URL** |
 |:---:|---|:---:|---|:---:|
 | 1 | **Машинне навчання і аналіз даних** | 1 | Основні концепції машинного навчання |  |
 |  |  | 2 | Дослідницький аналіз даних (EDA) | [Практика](notebooks/mod_01_topic_02_pandas_eda.ipynb) |
@@ -21,18 +23,13 @@
 | 7 | **Організація потоку робочих процесів** | 13 | Вступ до побудови ML-конвеєрів. Крос-валідація | [Практика](notebooks/mod_07_topic_13_mlpipe.ipynb) |
 |  |  | 14 | Вступ до MLOps. Підбір гіперпараметрів моделі | [Практика](notebooks/mod_07_topic_14_mlflow.ipynb) |
 
-## Матриця знань
+## Матриця знань/навичок
 ![course mtx](images/mlf_course_mtx.png)
 
-## Відтворення середовища
-
-### Python Version: 3.11.9
-
-### Conda:
+## Налаштування середовища
 ```sh
+# Python Version: 3.11.9
 conda env create -f requirements_conda.yml
-```
-### PIP:
-```sh
-pip install -r requirements_pip.txt
+# alternative
+# pip install -r requirements_pip.txt
 ```
