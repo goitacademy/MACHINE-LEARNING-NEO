@@ -9,7 +9,7 @@
 Володимир Голомб : : [LinkedIn](https://www.linkedin.com/in/vholomb) : : [Medium](https://medium.com/@wldmrgml) : : [GitHub](https://github.com/woldemarg)
 
 ## Зміст курсу
-7 тижнів, 14 занять, 5 практичних ДЗ, фінальний проєкт (Kaggle competition)
+14 занять, 7 тижнів, 5 практичних ДЗ, 1 фінальний проєкт (у форматі Kaggle змагання)
 </br>
 | **#** | **Модуль / Тиждень** | **#** | **Тема** | **URL** |
 |:---:|---|:---:|---|:---:|

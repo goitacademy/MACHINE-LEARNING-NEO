@@ -15,10 +15,12 @@ dependencies:
   - attrs=23.2.0=pyh71513ae_0
   - autopep8=2.0.4=pyhd8ed1ab_0
   - babel=2.14.0=pyhd8ed1ab_0
+  - backports=1.1=pyhd3eb1b0_0
+  - backports.tarfile=1.0.0=pyhd8ed1ab_1
   - bcrypt=4.1.2=py311hc37eb10_0
   - beautifulsoup4=4.12.3=pyha770c72_0
   - binaryornot=0.4.4=py_1
-  - black=24.4.0=py311h1ea47a8_0
+  - black=24.4.2=py311h1ea47a8_0
   - bleach=6.1.0=pyhd8ed1ab_0
   - blis=0.9.0=h2466b09_2
   - brotli=1.1.0=hcfcfb64_1
@@ -97,7 +99,7 @@ dependencies:
   - isoduration=20.11.0=pyhd8ed1ab_0
   - isort=5.13.2=pyhd8ed1ab_0
   - jaraco.classes=3.4.0=pyhd8ed1ab_1
-  - jaraco.context=5.3.0=pyhd8ed1ab_0
+  - jaraco.context=5.3.0=pyhd8ed1ab_1
   - jaraco.functools=4.0.0=pyhd8ed1ab_0
   - jedi=0.19.1=pyhd8ed1ab_0
   - jellyfish=1.0.3=py311hc37eb10_0
@@ -114,11 +116,11 @@ dependencies:
   - jupyter_events=0.10.0=pyhd8ed1ab_0
   - jupyter_server=2.14.0=pyhd8ed1ab_0
   - jupyter_server_terminals=0.5.3=pyhd8ed1ab_0
-  - jupyterlab=4.1.6=pyhd8ed1ab_0
+  - jupyterlab=4.1.8=pyhd8ed1ab_0
   - jupyterlab_pygments=0.3.0=pyhd8ed1ab_1
   - jupyterlab_server=2.27.1=pyhd8ed1ab_0
   - jupyterlab_widgets=3.0.10=pyhd8ed1ab_0
-  - keyring=25.1.0=pyh7428d3b_0
+  - keyring=25.2.0=pyh7428d3b_0
   - kiwisolver=1.4.5=py311h005e61a_1
   - kneed=0.8.5=pyhd8ed1ab_0
   - krb5=1.21.2=heb0366b_0
@@ -228,7 +230,7 @@ dependencies:
   - numpydoc=1.7.0=pyhd8ed1ab_0
   - openjpeg=2.5.2=h3d672ee_0
   - openmp=5.0.0=vc14_1
-  - openssl=3.2.1=hcfcfb64_1
+  - openssl=3.3.0=hcfcfb64_0
   - overrides=7.7.0=pyhd8ed1ab_0
   - packaging=24.0=pyhd8ed1ab_0
   - pandas=2.2.2=py311hf63dbb6_0
@@ -299,7 +301,7 @@ dependencies:
   - qtconsole=5.5.1=pyhd8ed1ab_0
   - qtconsole-base=5.5.1=pyha770c72_0
   - qtpy=2.4.1=pyhd8ed1ab_0
-  - referencing=0.34.0=pyhd8ed1ab_0
+  - referencing=0.35.0=pyhd8ed1ab_0
   - requests=2.31.0=pyhd8ed1ab_0
   - rfc3339-validator=0.1.4=pyhd8ed1ab_0
   - rfc3986-validator=0.1.1=pyh9f0ad1d_0
@@ -337,8 +339,8 @@ dependencies:
   - tenacity=8.2.3=pyhd8ed1ab_0
   - terminado=0.18.1=pyh5737063_0
   - text-unidecode=1.3=pyhd8ed1ab_1
-  - textdistance=4.6.0=pyhd8ed1ab_0
-  - threadpoolctl=3.4.0=pyhc1e730c_0
+  - textdistance=4.6.2=pyhd8ed1ab_0
+  - threadpoolctl=3.5.0=pyhc1e730c_0
   - three-merge=0.1.1=pyh9f0ad1d_0
   - tinycss2=1.3.0=pyhd8ed1ab_0
   - tk=8.6.13=h5226925_1
