@@ -38,3 +38,9 @@ conda env create -f requirements_conda.yml
 # alternative
 # pip install -r requirements_pip.txt
 ```
+
+## Рекомендована конфігурація ПК
+- CPU: 4+ cores
+- RAM: 8+ GB
+- GPU: not required
+- OS: Windows 64-bit
