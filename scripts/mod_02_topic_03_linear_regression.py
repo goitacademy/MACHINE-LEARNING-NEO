@@ -6,7 +6,7 @@ from sklearn.datasets import fetch_california_housing
 from sklearn.metrics import mean_absolute_error, mean_absolute_percentage_error
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 
 # %%
 
@@ -67,6 +67,7 @@ plt.legend(
     title='MedHouseVal',
     bbox_to_anchor=(1.05, 0.95),
     loc='upper left')
+
 plt.title('Median house value depending of\n their spatial location')
 
 plt.show()
@@ -131,7 +132,24 @@ print(f'R2: {r_sq:.2f} | MAE: {mae:.2f} | MAPE: {mape:.2f}')
 
 # %%
 
-pct_error = (y_pred / y_test - 1).clip(-1, 1)
+# [a, b] -> [1, a, b, a^2, ab, b^2]
+poly = PolynomialFeatures(2).set_output(transform='pandas')
+
+Xtr = poly.fit_transform(X_train_scaled)
+Xts = poly.transform(X_test_scaled)
+
+model_upd = LinearRegression().fit(Xtr, y_train)
+y_pred_upd = model_upd.predict(Xts)
+
+r_sq_upd = model_upd.score(Xtr, y_train)
+mae_upd = mean_absolute_error(y_test, y_pred_upd)
+mape_upd = mean_absolute_percentage_error(y_test, y_pred_upd)
+
+print(f'R2: {r_sq_upd:.2f} | MAE: {mae_upd:.2f} | MAPE: {mape_upd:.2f}')
+
+# %%
+
+pct_error = (y_pred_upd / y_test - 1).clip(-1, 1)
 
 sns.scatterplot(
     x=y_test,
