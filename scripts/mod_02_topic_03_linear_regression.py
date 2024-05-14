@@ -1,4 +1,5 @@
 import warnings
+import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
@@ -129,6 +130,10 @@ mae = mean_absolute_error(y_test, y_pred)
 mape = mean_absolute_percentage_error(y_test, y_pred)
 
 print(f'R2: {r_sq:.2f} | MAE: {mae:.2f} | MAPE: {mape:.2f}')
+
+# %%
+
+pd.Series(model.coef_, index=X_train_scaled.columns)
 
 # %%
 
