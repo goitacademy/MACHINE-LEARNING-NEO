@@ -20,10 +20,6 @@ california_housing.target.head()
 
 # %%
 
-data = california_housing.frame.info()
-
-# %%
-
 sns.set_theme()
 
 melted = california_housing.frame.melt()
@@ -121,7 +117,10 @@ X_train_scaled.describe()
 model = LinearRegression().fit(X_train_scaled, y_train)
 y_pred = model.predict(X_test_scaled)
 
-y_pred
+ymin, ymax = y_train.agg(['min', 'max']).values
+
+y_pred = pd.Series(y_pred, index=X_test_scaled.index).clip(ymin, ymax)
+y_pred.head()
 
 # %%
 
@@ -145,6 +144,7 @@ Xts = poly.transform(X_test_scaled)
 
 model_upd = LinearRegression().fit(Xtr, y_train)
 y_pred_upd = model_upd.predict(Xts)
+y_pred_upd = pd.Series(y_pred_upd, index=Xts.index).clip(ymin, ymax)
 
 r_sq_upd = model_upd.score(Xtr, y_train)
 mae_upd = mean_absolute_error(y_test, y_pred_upd)
