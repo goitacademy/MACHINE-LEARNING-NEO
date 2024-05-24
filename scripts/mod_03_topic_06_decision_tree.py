@@ -5,6 +5,7 @@ from sklearn import tree
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import balanced_accuracy_score
 from imblearn.over_sampling import SMOTE
+from prosphera.projector import Projector
 
 # %%
 
@@ -58,8 +59,8 @@ tree.plot_tree(clf,
                filled=True,
                fontsize=6,
                class_names=list(map(str, y_train.unique())),
-               proportion=True,
-               precision=2,
+               # proportion=True,
+               # precision=2,
                rounded=True)
 
 plt.savefig('../derived/mod_03_topic_06_decision_tree.png')
@@ -98,8 +99,8 @@ tree.plot_tree(clf_upd,
                filled=True,
                fontsize=8,
                class_names=list(map(str, y_res.unique())),
-               proportion=True,
-               precision=2,
+               # proportion=True,
+               # precision=2,
                rounded=True)
 
 plt.show()
@@ -114,3 +115,8 @@ plt.show()
     .barh())
 
 plt.show()
+
+# %%
+
+visualizer = Projector()
+visualizer.project(data=X, labels=y)
