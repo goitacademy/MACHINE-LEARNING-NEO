@@ -126,7 +126,7 @@ sns.regplot(x=x, y=y)
 
 # %%
 
-mis = mutual_info_regression(x.reshape(-1, 1), y.reshape(-1, 1))[0]
+mis = mutual_info_regression(x.reshape(-1, 1), y)[0]
 cor = np.corrcoef(x, y)[0, 1]
 
 print(f'MI score: {mis:.2f} | Cor index: {cor:.2f}')
