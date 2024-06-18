@@ -4,7 +4,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import mean_absolute_percentage_error
+from sklearn.metrics import median_absolute_error
 import statsmodels.api as sm
 from scipy.stats import zscore
 from prophet import Prophet
@@ -218,5 +218,6 @@ plt.show()
 
 # %%
 
-mape = mean_absolute_percentage_error(df_test, pred['yhat'])
-print(f'Accuracy: {1 - mape:.1%}')
+approx_mape = median_absolute_error(df_test, pred['yhat'])
+
+print(f'Accuracy: {1 - approx_mape:.1%}')

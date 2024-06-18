@@ -22,7 +22,7 @@ autos[['stroke', 'bore', 'stroke_ratio']].head()
 
 accidents = datasets['accidents']
 
-accidents['LogWindSpeed'] = accidents.WindSpeed.apply(np.log1p)
+accidents['LogWindSpeed'] = accidents['WindSpeed'].apply(np.log1p)
 
 sns.set_theme()
 
@@ -116,6 +116,20 @@ c_test = c_test.merge(
     how='left')
 
 c_test[['Coverage', 'AverageClaim']].head(10)
+
+# %%
+
+x = np.linspace(0, 2, 50)
+y = np.sin(2 * np.pi * 0.25 * x)
+
+sns.regplot(x=x, y=y)
+
+# %%
+
+mis = mutual_info_regression(x.reshape(-1, 1), y.reshape(-1, 1))[0]
+cor = np.corrcoef(x, y)[0, 1]
+
+print(f'MI score: {mis:.2f} | Cor index: {cor:.2f}')
 
 # %%
 

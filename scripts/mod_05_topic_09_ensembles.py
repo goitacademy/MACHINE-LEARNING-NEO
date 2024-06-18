@@ -92,7 +92,9 @@ def predict_with_measure(model, Xt, yt):
 
 # %%
 
-mod_log_reg = LogisticRegression(n_jobs=-1).fit(X_res, y_res)
+mod_log_reg = (LogisticRegression(
+    # n_jobs=-1
+).fit(X_res, y_res))
 
 prd_log_reg = predict_with_measure(mod_log_reg, X_test, y_test)
 
