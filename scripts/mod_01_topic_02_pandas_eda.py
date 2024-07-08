@@ -78,12 +78,12 @@ df
 
 # %%
 
-df.groupby('key').aggregate(['min', 'median', 'max'])
+df.groupby('key').agg(['min', 'median', 'max'])
 
 # %%
 
-df.groupby('key').aggregate({'data1': 'min',
-                             'data2': 'max'})
+df.groupby('key').agg({'data1': 'min',
+                       'data2': 'max'})
 
 # %%
 

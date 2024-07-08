@@ -12,17 +12,24 @@ from sklearn.preprocessing import StandardScaler, PolynomialFeatures
 # %%
 
 california_housing = fetch_california_housing(as_frame=True)
-california_housing.data.head()
+
+data = california_housing['frame']
+data.head()
 
 # %%
 
-california_housing.target.head()
+target = data.pop('MedHouseVal')
+target.head()
+
+# %%
+
+data.info()
 
 # %%
 
 sns.set_theme()
 
-melted = california_housing.frame.melt()
+melted = data.melt()
 
 g = sns.FacetGrid(melted,
                   col='variable',
@@ -44,18 +51,18 @@ plt.show()
 # %%
 
 features_of_interest = ['AveRooms', 'AveBedrms', 'AveOccup', 'Population']
-california_housing.frame[features_of_interest].describe()
+data[features_of_interest].describe()
 
 # %%
 
 fig, ax = plt.subplots(figsize=(6, 5))
 
 sns.scatterplot(
-    data=california_housing.frame,
+    data=data,
     x='Longitude',
     y='Latitude',
-    size='MedHouseVal',
-    hue='MedHouseVal',
+    size=target,
+    hue=target,
     palette='viridis',
     alpha=0.5,
     ax=ax)
@@ -72,7 +79,7 @@ plt.show()
 # %%
 
 columns_drop = ['Longitude', 'Latitude']
-subset = california_housing.frame.drop(columns=columns_drop)
+subset = data.drop(columns=columns_drop)
 
 corr_mtx = subset.corr()
 
@@ -96,8 +103,8 @@ plt.show()
 # %%
 
 X_train, X_test, y_train, y_test = train_test_split(
-    california_housing.data,
-    california_housing.target,
+    data,
+    target,
     test_size=0.2,
     random_state=42)
 
