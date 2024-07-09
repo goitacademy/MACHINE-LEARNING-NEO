@@ -29,7 +29,7 @@ data.info()
 
 sns.set_theme()
 
-melted = data.melt()
+melted = pd.concat([data, target], axis=1).melt()
 
 g = sns.FacetGrid(melted,
                   col='variable',
@@ -79,7 +79,7 @@ plt.show()
 # %%
 
 columns_drop = ['Longitude', 'Latitude']
-subset = data.drop(columns=columns_drop)
+subset = pd.concat([data, target], axis=1).drop(columns=columns_drop)
 
 corr_mtx = subset.corr()
 
