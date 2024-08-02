@@ -56,7 +56,6 @@ plt.show()
 data.drop(
     ['emp.var.rate',
      'cons.price.idx',
-     'cons.conf.idx',
      'nr.employed'],
     axis=1,
     inplace=True)
@@ -115,7 +114,7 @@ X_res, y_res = sm.fit_resample(X_train, y_train)
 
 # %%
 
-knn_mod = KNeighborsClassifier(n_neighbors=15, n_jobs=-1).fit(X_res, y_res)
+knn_mod = KNeighborsClassifier(n_neighbors=7, n_jobs=-1).fit(X_res, y_res)
 
 knn_preds = knn_mod.predict(X_test)
 

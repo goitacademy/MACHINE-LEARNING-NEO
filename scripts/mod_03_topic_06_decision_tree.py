@@ -1,9 +1,11 @@
 import pandas as pd
+import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn import tree
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import balanced_accuracy_score
+from sklearn.impute import SimpleImputer
 from imblearn.over_sampling import SMOTE
 from prosphera.projector import Projector
 
@@ -19,6 +21,14 @@ data.info()
 # %%
 
 X, y = (data.drop('Outcome', axis=1), data['Outcome'])
+
+cols = ['Glucose',
+        'BloodPressure',
+        'SkinThickness',
+        'Insulin',
+        'BMI']
+
+X[cols] = X[cols].replace(0, np.nan)
 
 # %%
 
@@ -37,6 +47,13 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y,
     test_size=0.3,
     random_state=42)
+
+# %%
+
+imputer = SimpleImputer()
+
+X_train[cols] = imputer.fit_transform(X_train[cols])
+X_test[cols] = imputer.fit_transform(X_test[cols])
 
 # %%
 
@@ -59,8 +76,6 @@ tree.plot_tree(clf,
                filled=True,
                fontsize=6,
                class_names=list(map(str, y_train.unique())),
-               # proportion=True,
-               # precision=2,
                rounded=True)
 
 plt.savefig('../derived/mod_03_topic_06_decision_tree.png')
@@ -72,7 +87,7 @@ y_train.value_counts(normalize=True)
 
 # %%
 
-sm = SMOTE(random_state=42, k_neighbors=10)
+sm = SMOTE(random_state=42, k_neighbors=15)
 X_res, y_res = sm.fit_resample(X_train, y_train)
 
 y_res.value_counts(normalize=True)
@@ -80,7 +95,7 @@ y_res.value_counts(normalize=True)
 # %%
 
 clf_upd = (tree.DecisionTreeClassifier(
-    max_depth=4,
+    max_depth=5,
     random_state=42)
     .fit(X_res, y_res))
 
@@ -92,15 +107,13 @@ print(f'Acc.: {acc:.1%}')
 
 # %%
 
-plt.figure(figsize=(25, 7))
+plt.figure(figsize=(30, 8))
 
 tree.plot_tree(clf_upd,
                feature_names=X.columns,
                filled=True,
                fontsize=8,
                class_names=list(map(str, y_res.unique())),
-               # proportion=True,
-               # precision=2,
                rounded=True)
 
 plt.show()
@@ -119,4 +132,4 @@ plt.show()
 # %%
 
 visualizer = Projector()
-visualizer.project(data=X, labels=y)
+visualizer.project(data=X_train, labels=y_train)
