@@ -29,7 +29,6 @@ out = (data
        .apply(lambda x:
               np.abs(zscore(x))
               .ge(3))
-       .astype(int)
        .mean(1))
 
 out_ind = np.where(out > 0.2)[0]

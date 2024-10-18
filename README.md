@@ -35,7 +35,7 @@
 ```sh
 # Python Version: 3.11.9
 conda env create -f requirements_conda.yml
-# alternative
+# alternative (outdated)
 # pip install -r requirements_pip.txt
 ```
 
