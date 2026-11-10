@@ -1,8 +1,9 @@
+import logging
 import warnings
 import numpy as np
 import pandas as pd
 import seaborn as sns
-from ydata_profiling import ProfileReport
+import sweetviz as sv
 
 # %%
 
@@ -148,11 +149,13 @@ titanic.pivot_table('survived', ['sex', age], [fare, 'class'],  observed=True)
 
 # %%
 
+logging.getLogger('matplotlib.font_manager').setLevel(logging.ERROR)
+
 with warnings.catch_warnings():
     warnings.simplefilter('ignore')
 
-    report = ProfileReport(
-        titanic,
-        title='Titanic')
+    report = sv.analyze(titanic)
 
-    report.to_file('../derived/mod_01_topic_02_titanic_report.html')
+    report.show_html(
+        '../derived/mod_01_topic_02_titanic_report.html',
+        open_browser=False)

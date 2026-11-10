@@ -1,11 +1,9 @@
-import warnings
 import pickle
 import numpy as np
 import pandas as pd
 from scipy.cluster.hierarchy import dendrogram
 from matplotlib import pyplot as plt
 import seaborn as sns
-from yellowbrick.cluster import KElbowVisualizer
 from kneed import KneeLocator
 from sklearn.cluster import KMeans, AgglomerativeClustering
 from sklearn.preprocessing import StandardScaler
@@ -73,21 +71,19 @@ X = pca.transform(X)[:, :n_components]
 
 # %%
 
-model_kmn = KMeans(random_state=42)
+ks = range(2, 10)
 
-visualizer = KElbowVisualizer(
-    model_kmn,
-    k=(2, 10),
-    timings=False)
+inertia = [KMeans(n_clusters=k, random_state=42).fit(X).inertia_ for k in ks]
 
+kneedle_kmn = KneeLocator(
+    x=ks,
+    y=inertia,
+    curve='convex',
+    direction='decreasing')
 
-with warnings.catch_warnings():
-    warnings.simplefilter('ignore')
+kneedle_kmn.plot_knee()
 
-    visualizer.fit(X)
-
-visualizer.show()
-
+plt.show()
 
 # %%
 
@@ -129,13 +125,10 @@ plt.show()
 
 # %%
 
-k_best = visualizer.elbow_value_
+k_best = kneedle_kmn.elbow
 
-with warnings.catch_warnings():
-    warnings.simplefilter('ignore')
-
-    model_kmn = KMeans(n_clusters=k_best, random_state=42).fit(X)
-    model_agg = AgglomerativeClustering(n_clusters=k_best).fit(X)
+model_kmn = KMeans(n_clusters=k_best, random_state=42).fit(X)
+model_agg = AgglomerativeClustering(n_clusters=k_best).fit(X)
 
 labels_kmn = pd.Series(model_kmn.labels_, name='k-means')
 labels_agg = pd.Series(model_agg.labels_, name='h-clust')

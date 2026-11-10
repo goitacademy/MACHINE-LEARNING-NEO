@@ -1,10 +1,10 @@
-import warnings
 import pandas as pd
 import numpy as np
 import category_encoders as ce
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import KBinsDiscretizer, StandardScaler
 from sklearn.svm import SVC
+from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import accuracy_score, confusion_matrix
 
 # %%
@@ -22,7 +22,7 @@ data['Description'].head()
 
 # %%
 
-data.drop('Description', axis=1, inplace=True)
+data = data.drop('Description', axis=1)
 
 # %%
 
@@ -48,7 +48,7 @@ X_train, X_test, y_train, y_test = (
 
 # %%
 
-num_cols = X_train.select_dtypes(exclude='object').columns
+num_cols = X_train.select_dtypes(exclude='str').columns
 
 kbins = KBinsDiscretizer(encode='ordinal').fit(X_train[num_cols])
 
@@ -82,10 +82,11 @@ X_test = scaler.transform(X_test)
 
 # %%
 
-clf = SVC(class_weight='balanced',
-          kernel='poly',
-          probability=True,
-          random_state=42)
+clf = CalibratedClassifierCV(
+    SVC(class_weight='balanced',
+        kernel='poly'),
+    method='isotonic',
+    ensemble=False)
 
 clf.fit(X_train, y_train)
 
@@ -123,15 +124,13 @@ pet = pd.DataFrame(
 
 pet[num_cols] = kbins.transform(pet[num_cols]).astype(int).astype(str)
 
-with warnings.catch_warnings():
-    warnings.simplefilter('ignore')
-    prob = (clf
-            .predict_proba(
-                scaler
+prob = (clf
+        .predict_proba(
+            scaler
+            .transform(
+                encoder
                 .transform(
-                    encoder
-                    .transform(
-                        pet)))
-            .flatten())
+                    pet)))
+        .flatten())
 
 print(f'This pet has a {prob[1]:.1%} probability "of getting adopted"')

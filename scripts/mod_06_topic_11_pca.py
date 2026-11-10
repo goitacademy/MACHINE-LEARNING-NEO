@@ -28,12 +28,12 @@ target.value_counts()
 out = (data
        .apply(lambda x:
               np.abs(zscore(x)) >= 3)
-       .mean(1))
+       .mean(axis=1))
 
 out_ind = np.where(out > 0.2)[0]
 
-data.drop(out_ind, inplace=True)
-target.drop(out_ind, inplace=True)
+data = data.drop(out_ind)
+target = target.drop(out_ind)
 
 # %%
 

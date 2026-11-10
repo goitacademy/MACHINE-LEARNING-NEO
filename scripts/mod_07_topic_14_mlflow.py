@@ -68,7 +68,8 @@ with mlflow.start_run(run_name='rfr'):
     # Log the model
     model_info = mlflow.sklearn.log_model(
         sk_model=model_base,
-        artifact_path='model_base',
+        serialization_format='cloudpickle',
+        name='model_base',
         signature=signature,
         input_example=X.head(),
         registered_model_name='model_base_tracking')
@@ -130,7 +131,8 @@ with mlflow.start_run(run_name='gbr'):
 
     model_info = mlflow.sklearn.log_model(
         sk_model=model_upd,
-        artifact_path='model_upd',
+        serialization_format='cloudpickle',
+        name='model_upd',
         signature=signature,
         input_example=X.head(),
         registered_model_name='model_upd_tracking')
