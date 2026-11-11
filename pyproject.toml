@@ -13,6 +13,9 @@ dependencies = [
     "statsmodels==0.15.0",
     "imbalanced-learn==0.14.2",
     "category-encoders==2.11.2",
+    "xgboost-cpu==3.4.1; sys_platform != 'darwin'",  # CPU-only build; no macOS wheels
+    "xgboost==3.4.1; sys_platform == 'darwin'",
+    "lightgbm==4.7.0",
     "prophet==1.5.0",
     "sweetviz==2.3.3",
     "prosphera==1.0.5",

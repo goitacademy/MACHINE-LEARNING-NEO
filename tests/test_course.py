@@ -29,7 +29,7 @@ REQUIRES_URL = CFG.get("requires_url", {})  # {path: url}
 MODULES = sorted(CFG.get("modules", []))    # helper modules: import-checked, not run
 MLFLOW_URL = CFG.get("mlflow_url")
 COURSE_DIRS = ["scripts", "notebooks", "competition", "homework", "datasets", "derived", "models"]
-PINS = dict(m.groups() for m in (re.fullmatch(r"([A-Za-z0-9_.-]+)==(\S+)", d)
+PINS = dict(m.groups() for m in (re.fullmatch(r"([A-Za-z0-9_.-]+)==([^\s;]+)\s*(?:;.*)?", d)
                                  for d in PYPROJECT["project"]["dependencies"]) if m)
 
 
@@ -195,5 +195,5 @@ def test_requirements_pip_mirrors_pyproject_pins():
 def test_requirements_conda_mirrors_pyproject_pins():
     text = (ROOT / "requirements_conda.yml").read_text(encoding="utf-8").lower().replace("_", "-")
     stale = {n: v for n, v in PINS.items()
-             if not re.search(rf"(?m)^\s*- {re.escape(n.lower())}==?{re.escape(v)}\s*$", text)}
+             if not re.search(rf"(?m)^\s*- {re.escape(n.lower())}==?{re.escape(v)}\s*(?:;.*)?$", text)}
     assert not stale, f"requirements_conda.yml does not mirror pyproject.toml: {stale}"

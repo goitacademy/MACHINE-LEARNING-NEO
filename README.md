@@ -32,7 +32,7 @@
 ![course mtx](images/mlf_course_mtx.png)
 
 ## Налаштування середовища
-Python 3.13. Версії пакетів зафіксовані в `pyproject.toml` та `uv.lock`. Файл `requirements_pip.txt` згенеровано з `uv.lock`, а `requirements_conda.yml` містить ті самі версії основних пакетів. Оберіть будь-який один із варіантів нижче.
+Python 3.13. Версії пакетів зафіксовані в `pyproject.toml` та `uv.lock`. Файл `requirements_pip.txt` згенеровано з `uv.lock`, а `requirements_conda.yml` містить ті самі версії основних пакетів. Оберіть будь-який один із варіантів нижче. На macOS перед встановленням середовища виконайте `brew install libomp`: бібліотекам XGBoost і LightGBM потрібна OpenMP.
 
 ### uv (рекомендовано)
 ```sh

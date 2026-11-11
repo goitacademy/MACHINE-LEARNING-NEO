@@ -4,6 +4,7 @@ from sklearn.ensemble import (
     StackingClassifier,
     VotingClassifier,
     GradientBoostingClassifier,
+    HistGradientBoostingClassifier,
     AdaBoostClassifier,
     BaggingClassifier,
     RandomForestClassifier)
@@ -12,6 +13,8 @@ from sklearn.naive_bayes import GaussianNB
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.preprocessing import StandardScaler
+from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
 from imblearn.over_sampling import SMOTE
 import category_encoders as ce
 from sklearn.metrics import f1_score
@@ -139,6 +142,33 @@ mod_grd_bst = (GradientBoostingClassifier(
     .fit(X_res, y_res))
 
 prd_grd_bst = predict_with_measure(mod_grd_bst, X_test, y_test)
+
+# %%
+
+mod_hst_bst = (HistGradientBoostingClassifier(
+    random_state=42)
+    .fit(X_res, y_res))
+
+prd_hst_bst = predict_with_measure(mod_hst_bst, X_test, y_test)
+
+# %%
+
+mod_xgb_bst = (XGBClassifier(
+    max_depth=6,
+    random_state=42)
+    .fit(X_res, y_res))
+
+prd_xgb_bst = predict_with_measure(mod_xgb_bst, X_test, y_test)
+
+# %%
+
+mod_lgb_bst = (LGBMClassifier(
+    num_leaves=31,
+    random_state=42,
+    verbose=-1)
+    .fit(X_res, y_res))
+
+prd_lgb_bst = predict_with_measure(mod_lgb_bst, X_test, y_test)
 
 # %%
 
