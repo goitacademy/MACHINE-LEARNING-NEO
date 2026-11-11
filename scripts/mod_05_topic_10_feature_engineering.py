@@ -2,6 +2,8 @@ import pickle
 import numpy as np
 import pandas as pd
 from sklearn.feature_selection import mutual_info_regression
+from lightgbm import LGBMRegressor
+import shap
 import matplotlib.pyplot as plt
 import seaborn as sns
 
@@ -183,3 +185,23 @@ sns.lmplot(data=autos,
            facet_kws={'legend_out': False})
 
 plt.show()
+
+# %%
+
+model = (LGBMRegressor(
+    random_state=42,
+    verbose=-1)
+    .fit(X, y))
+
+explainer = shap.TreeExplainer(model)
+shap_values = explainer(X)
+
+shap.plots.bar(shap_values)
+
+# %%
+
+shap.plots.beeswarm(shap_values)
+
+# %%
+
+shap.plots.waterfall(shap_values[0])

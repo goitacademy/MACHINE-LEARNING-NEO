@@ -1,6 +1,7 @@
 # Conda variant of pyproject.toml: same top-level versions as uv.lock / requirements_pip.txt.
-# prosphera and xgboost-cpu are not on conda-forge, so they are installed with pip;
-# xgboost-cpu has no macOS wheels, so macOS gets the full xgboost package.
+# prosphera and xgboost-cpu are not on conda-forge and shap 0.54.1 is not there yet,
+# so they are installed with pip; xgboost-cpu has no macOS wheels, so macOS gets
+# the full xgboost package.
 name: env_mlf
 channels:
   - conda-forge
@@ -29,3 +30,4 @@ dependencies:
       - prosphera==1.0.5
       - xgboost-cpu==3.4.1; sys_platform != 'darwin'
       - xgboost==3.4.1; sys_platform == 'darwin'
+      - shap==0.54.1

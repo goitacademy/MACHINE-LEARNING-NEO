@@ -155,9 +155,11 @@ scikit-learn==1.9.1
 scipy==1.18.1
 seaborn==0.13.2
 send2trash==2.1.0
+shap==0.54.1
 six==1.17.0
 sklearn-compat==0.1.6
 skops==0.16.0
+slicer==0.0.8
 smmap==5.0.3
 soupsieve==4.0.1
 sqlalchemy==2.1.8

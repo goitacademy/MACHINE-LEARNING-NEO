@@ -16,6 +16,7 @@ dependencies = [
     "xgboost-cpu==3.4.1; sys_platform != 'darwin'",  # CPU-only build; no macOS wheels
     "xgboost==3.4.1; sys_platform == 'darwin'",
     "lightgbm==4.7.0",
+    "shap==0.54.1",
     "prophet==1.5.0",
     "sweetviz==2.3.3",
     "prosphera==1.0.5",
