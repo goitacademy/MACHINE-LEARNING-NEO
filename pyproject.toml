@@ -22,6 +22,10 @@ dependencies = [
     "prosphera==1.0.5",
     "kneed==0.9.0",
     "mlflow==3.18.0",
+    "fastapi==0.162.4",
+    "uvicorn==0.54.0",
+    "streamlit==1.67.0",
+    "requests==2.34.2",
     "joblib==1.6.0",
     "ipykernel==7.4.0",
     "ipywidgets==8.1.9",
@@ -40,6 +44,7 @@ maintainer = [
     "pytest==9.2.0",
     "pypdf==7.0.0",
     "openpyxl==3.1.5",
+    "playwright==1.55.0",  # screenshots with the installed Edge (channel="msedge"), no browser download
 ]
 
 [tool.pytest.ini_options]
@@ -49,8 +54,12 @@ addopts = "-ra"
 [tool.course_tests]
 # Seconds allowed per script or notebook; override with COURSE_TEST_TIMEOUT.
 timeout = 1800
-# Helper modules: import-checked instead of run, and not expected to have a notebook twin.
-modules = ["scripts/mod_07_topic_13_transformer.py"]
+# Helper modules and service entry points: import-checked instead of run, and not expected to have a notebook twin.
+modules = [
+    "scripts/mod_07_topic_13_transformer.py",
+    "scripts/mod_07_topic_14_api.py",  # FastAPI service, run with uvicorn
+    "scripts/mod_07_topic_14_app.py",  # Streamlit app, run with `streamlit run`
+]
 # Files whose requires_url is this address get a local MLflow server started for them when none answers.
 mlflow_url = "http://127.0.0.1:8080"
 

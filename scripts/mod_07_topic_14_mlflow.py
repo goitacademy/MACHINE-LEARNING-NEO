@@ -72,7 +72,7 @@ with mlflow.start_run(run_name='rfr'):
         name='model_base',
         signature=signature,
         input_example=X.head(),
-        registered_model_name='model_base_tracking')
+        registered_model_name='bigmart_sales')
 
 # %%
 
@@ -135,14 +135,28 @@ with mlflow.start_run(run_name='gbr'):
         name='model_upd',
         signature=signature,
         input_example=X.head(),
-        registered_model_name='model_upd_tracking')
+        registered_model_name='bigmart_sales')
 
 # %%
 
-# best_run = (mlflow
-#             .search_runs(
-#                 experiment_names=['MLflow Tracking'],
-#                 order_by=['metrics.cv_rmse_score'],
-#                 max_results=1))
+best_run = (mlflow
+            .search_runs(
+                experiment_names=['MLflow Tracking'],
+                order_by=['metrics.cv_rmse_score'],
+                max_results=1))
 
-# best_run[['tags.Model', 'metrics.cv_rmse_score']]
+best_run[['tags.Model', 'metrics.cv_rmse_score']]
+
+# %%
+
+client = mlflow.MlflowClient()
+
+best_version = client.search_model_versions(
+    filter_string=f"run_id = '{best_run.loc[0, 'run_id']}'")[0]
+
+client.set_registered_model_alias(
+    name='bigmart_sales',
+    alias='champion',
+    version=best_version.version)
+
+best_version.version

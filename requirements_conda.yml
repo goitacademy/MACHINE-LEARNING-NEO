@@ -21,6 +21,10 @@ dependencies:
   - sweetviz=2.3.3
   - kneed=0.9.0
   - mlflow=3.18.0
+  - fastapi=0.162.4
+  - uvicorn=0.54.0
+  - streamlit=1.67.0
+  - requests=2.34.2
   - joblib=1.6.0
   - ipykernel=7.4.0
   - ipywidgets=8.1.9
