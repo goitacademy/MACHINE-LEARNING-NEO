@@ -1,0 +1,74 @@
+[project]
+name = "machine-learning-neo"
+version = "4.0.0"
+description = "Machine Learning: Fundamentals and Applications (Neoversity) - course code"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "numpy==2.5.4",
+    "pandas==3.1.1",
+    "scipy==1.18.1",
+    "matplotlib==3.11.2",
+    "seaborn==0.13.2",
+    "scikit-learn==1.9.1",
+    "statsmodels==0.15.0",
+    "imbalanced-learn==0.14.2",
+    "category-encoders==2.11.2",
+    "xgboost-cpu==3.4.1; sys_platform != 'darwin'",  # CPU-only build; no macOS wheels
+    "xgboost==3.4.1; sys_platform == 'darwin'",
+    "lightgbm==4.7.0",
+    "shap==0.54.1",
+    "prophet==1.5.0",
+    "sweetviz==2.3.3",
+    "prosphera==1.0.5",
+    "kneed==0.9.0",
+    "mlflow==3.18.0",
+    "fastapi==0.162.4",
+    "uvicorn==0.54.0",
+    "streamlit==1.67.0",
+    "requests==2.34.2",
+    "joblib==1.6.0",
+    "ipykernel==7.4.0",
+    "ipywidgets==8.1.9",
+    "jupyterlab==4.6.6",
+]
+
+[tool.uv]
+package = false
+
+[tool.poetry]
+package-mode = false
+
+[dependency-groups]
+# Tools for testing and maintaining the course code; `uv sync` does not install them.
+maintainer = [
+    "pytest==9.2.0",
+    "pypdf==7.0.0",
+    "openpyxl==3.1.5",
+    "playwright==1.55.0",  # screenshots with the installed Edge (channel="msedge"), no browser download
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.course_tests]
+# Seconds allowed per script or notebook; override with COURSE_TEST_TIMEOUT.
+timeout = 1800
+# Helper modules and service entry points: import-checked instead of run, and not expected to have a notebook twin.
+modules = [
+    "scripts/mod_07_topic_13_transformer.py",
+    "scripts/mod_07_topic_14_api.py",  # FastAPI service, run with uvicorn
+    "scripts/mod_07_topic_14_app.py",  # Streamlit app, run with `streamlit run`
+]
+# Files whose requires_url is this address get a local MLflow server started for them when none answers.
+mlflow_url = "http://127.0.0.1:8080"
+
+[tool.course_tests.exclude]
+# path = reason. Excluded files are still reported (as skipped), never silently dropped.
+
+[tool.course_tests.requires_url]
+# path = URL that must answer before the file is run; otherwise the test is reported as BLOCKED.
+"scripts/mod_07_topic_14_mlflow.py" = "http://127.0.0.1:8080"
+"scripts/mod_02_topic_03_linear_regression.py" = "https://ndownloader.figshare.com"  # fetch_california_housing on first run
+"notebooks/mod_02_topic_03_linear_regression.ipynb" = "https://ndownloader.figshare.com"
+"notebooks/mod_07_topic_14_mlflow.ipynb" = "http://127.0.0.1:8080"

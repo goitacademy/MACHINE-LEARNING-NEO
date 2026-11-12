@@ -1,7 +1,7 @@
 # Machine Learning: Fundamentals and Applications
 
 ## Про курс
-Цей курс — частина програми EU магістратури Neoversity, спеціалізація Data Science & Data Analytics.  
+Цей курс — частина програми EU магістратури Neoversity, спеціалізація Data Science & Data Analytics.
 </br>
 Ознайомитись з повною магістерською програмою Data Science & Data Analytics та дізнатись більше про онлайн-навчання для IT-фахівців можна [тут](https://i.goit.global/Juqlh).
 
@@ -32,15 +32,52 @@
 ![course mtx](images/mlf_course_mtx.png)
 
 ## Налаштування середовища
+Python 3.13. Версії пакетів зафіксовані в `pyproject.toml` та `uv.lock`. Файл `requirements_pip.txt` згенеровано з `uv.lock`, а `requirements_conda.yml` містить ті самі версії основних пакетів. Оберіть будь-який один із варіантів нижче. На macOS перед встановленням середовища виконайте `brew install libomp`: бібліотекам XGBoost і LightGBM потрібна OpenMP.
+
+### uv (рекомендовано)
 ```sh
-# Python Version: 3.11.9
+# встановлення uv: https://docs.astral.sh/uv/getting-started/installation/
+uv sync              # створить .venv з Python 3.13 і встановить усі пакети з uv.lock
+uv run jupyter lab   # запуск Jupyter у цьому середовищі
+```
+
+### pip
+```sh
+python -m venv .venv            # потрібен встановлений Python 3.13
+.venv\Scripts\activate          # Windows; macOS/Linux: source .venv/bin/activate
+pip install -r requirements_pip.txt
+```
+
+### conda
+```sh
 conda env create -f requirements_conda.yml
-# alternative (outdated)
-# pip install -r requirements_pip.txt
+conda activate env_mlf
+```
+
+### poetry
+```sh
+poetry install   # Poetry 2.x читає залежності з pyproject.toml
+```
+
+### Запуск коду
+Скрипти в `scripts/` використовують відносні шляхи до даних, тому запускайте їх із цієї теки: `cd scripts && python mod_01_topic_02_pandas_eda.py`.
+
+Ноутбуки тем 13–14 імпортують клас із `scripts/`, тому перед запуском Jupyter додайте корінь репозиторію і теку `scripts/` до `PYTHONPATH`:
+```powershell
+# PowerShell, з кореня репозиторію
+$env:PYTHONPATH = "$PWD;$PWD\scripts"
+uv run jupyter lab
+```
+
+Для теми 14 спочатку запустіть локальний сервер MLflow в окремому терміналі: `mlflow server --host 127.0.0.1 --port 8080`.
+
+Наскрізний приклад теми 14 складається з трьох процесів, кожен в окремому терміналі. Сервер MLflow має працювати, а скрипт `mod_07_topic_14_mlflow.py` — бути виконаним, після чого з теки `scripts/` запустіть сервіс прогнозування і застосунок:
+```sh
+uvicorn mod_07_topic_14_api:app --host 127.0.0.1 --port 8000   # сервіс прогнозування FastAPI
+streamlit run mod_07_topic_14_app.py                           # застосунок Streamlit: http://localhost:8501
 ```
 
 ## Рекомендована конфігурація ПК
 - CPU: 4+ cores
 - RAM: 8+ GB
 - GPU: not required
-- OS: Windows 64-bit
