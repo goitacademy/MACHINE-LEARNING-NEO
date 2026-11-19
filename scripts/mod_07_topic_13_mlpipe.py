@@ -7,7 +7,7 @@ from sklearn.compose import ColumnTransformer, make_column_selector
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
 from sklearn.metrics import root_mean_squared_error
-from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.model_selection import train_test_split, cross_val_score, KFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import TargetEncoder
 from sklearn.utils import estimator_html_repr
@@ -64,7 +64,7 @@ data[['Item_Identifier', 'Item_Identifier_Type', 'Item_Type']].head()
 # %%
 
 data_num = data.select_dtypes(include=np.number)
-data_cat = data.select_dtypes(include='object')
+data_cat = data.select_dtypes(include='str')
 
 # %%
 
@@ -94,7 +94,8 @@ X_test_cat = cat_imputer.transform(X_test_cat)
 
 # %%
 
-enc_auto = TargetEncoder(random_state=42).set_output(transform='pandas')
+enc_auto = (TargetEncoder(cv=KFold(shuffle=True, random_state=42))
+            .set_output(transform='pandas'))
 
 X_train_cat = enc_auto.fit_transform(X_train_cat, y_train)
 X_test_cat = enc_auto.transform(X_test_cat)
@@ -149,7 +150,7 @@ data = vis_est.fit_transform(data)
 
 cat_transformer = Pipeline(steps=[
     ('imputer', SimpleImputer(strategy='most_frequent')),
-    ('encoder', TargetEncoder(random_state=42))])
+    ('encoder', TargetEncoder(cv=KFold(shuffle=True, random_state=42)))])
 
 num_transformer = Pipeline(steps=[
     ('imputer', SimpleImputer())])
@@ -158,7 +159,7 @@ preprocessor = (ColumnTransformer(
     transformers=[
         ('cat',
          cat_transformer,
-         make_column_selector(dtype_include=object)),
+         make_column_selector(dtype_include='str')),
         ('num',
          num_transformer,
          make_column_selector(dtype_include=np.number))],
@@ -183,13 +184,12 @@ with open('../models/mod_07_topic_13_mlpipe.joblib', 'wb') as fl:
 
 # %%
 
-data.drop([
+data = data.drop([
     'Item_Visibility_Avg',
     'Item_Visibility_Ratio_prev',
     'Item_Visibility_Ratio',
     'Item_Identifier_Type'],
-    axis=1,
-    inplace=True)
+    axis=1)
 
 data.sample(10, random_state=42)
 

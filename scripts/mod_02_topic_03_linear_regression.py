@@ -1,4 +1,3 @@
-import warnings
 import pandas as pd
 import numpy as np
 import seaborn as sns
@@ -37,10 +36,7 @@ g = sns.FacetGrid(melted,
                   sharex=False,
                   sharey=False)
 
-with warnings.catch_warnings():
-    warnings.simplefilter('ignore')
-
-    g.map(sns.histplot, 'value')
+g.map(sns.histplot, 'value')
 
 g.set_titles(col_template='{col_name}')
 

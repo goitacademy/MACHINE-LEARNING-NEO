@@ -1,4 +1,3 @@
-import warnings
 import pandas as pd
 import numpy as np
 from scipy.stats import zscore
@@ -19,7 +18,7 @@ data.head()
 
 # %%
 
-data.drop('duration', axis=1, inplace=True)
+data = data.drop('duration', axis=1)
 
 # %%
 
@@ -53,23 +52,19 @@ plt.show()
 
 # %%
 
-data.drop(
+data = data.drop(
     ['emp.var.rate',
      'cons.price.idx',
      'nr.employed'],
-    axis=1,
-    inplace=True)
+    axis=1)
 
 # %%
 
-data.select_dtypes(include='object').nunique()
+data.select_dtypes(include='str').nunique()
 
 # %%
 
-with warnings.catch_warnings():
-    warnings.simplefilter('ignore')
-
-    data['y'] = data['y'].replace({'no': 0, 'yes': 1})
+data['y'] = data['y'].map({'no': 0, 'yes': 1})
 
 # %%
 
@@ -82,7 +77,7 @@ X_train, X_test, y_train, y_test = (
 
 # %%
 
-cat_cols = X_train.select_dtypes(include='object').columns
+cat_cols = X_train.select_dtypes(include='str').columns
 cat_cols
 
 # %%

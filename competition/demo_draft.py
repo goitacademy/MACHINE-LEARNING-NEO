@@ -1,6 +1,8 @@
-import warnings
 import pandas as pd
-from sklearn.model_selection import cross_val_score, RandomizedSearchCV
+from sklearn.model_selection import (
+    cross_val_score,
+    RandomizedSearchCV,
+    StratifiedKFold)
 from sklearn.preprocessing import (
     PowerTransformer,
     KBinsDiscretizer,
@@ -27,8 +29,8 @@ target = train.pop('churn')
 
 model = make_pipeline(
     make_column_transformer(
-        (TargetEncoder(random_state=42),
-         make_column_selector(dtype_include=object)),
+        (TargetEncoder(cv=StratifiedKFold(shuffle=True, random_state=42)),
+         make_column_selector(dtype_include='str')),
         remainder='passthrough',
         n_jobs=-1),
     SelectKBest(),
@@ -70,16 +72,13 @@ model.set_params(**search.best_params_)
 
 # %%
 
-with warnings.catch_warnings():
-    warnings.simplefilter('ignore')
-
-    cv_results = cross_val_score(
-        estimator=model,
-        X=train,
-        y=target,
-        scoring='balanced_accuracy',
-        cv=10,
-        n_jobs=-1)
+cv_results = cross_val_score(
+    estimator=model,
+    X=train,
+    y=target,
+    scoring='balanced_accuracy',
+    cv=10,
+    n_jobs=-1)
 
 cv_results.mean()
 

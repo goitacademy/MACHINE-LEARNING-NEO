@@ -1,4 +1,3 @@
-import warnings
 import pandas as pd
 import numpy as np
 from sklearn.metrics import ConfusionMatrixDisplay, classification_report
@@ -28,14 +27,12 @@ data.isna().mean().sort_values(ascending=False)
 
 # %%
 
-with warnings.catch_warnings():
-    warnings.simplefilter('ignore')
-    tmp = (data
-           .groupby('Location')
-           .apply(lambda x:
-                  x.drop(['Location', 'Date'], axis=1)
-                  .isna()
-                  .mean()))
+tmp = (data
+       .groupby('Location')
+       .apply(lambda x:
+              x.drop('Date', axis=1)
+              .isna()
+              .mean()))
 
 plt.figure(figsize=(9, 13))
 
@@ -62,7 +59,7 @@ data = data.dropna(subset='RainTomorrow')
 # %%
 
 data_num = data.select_dtypes(include=np.number)
-data_cat = data.select_dtypes(include='object')
+data_cat = data.select_dtypes(include='str')
 
 # %%
 
@@ -99,7 +96,7 @@ data_cat[['Year', 'Month']] = (data_cat['Date']
                                .apply(lambda x:
                                       pd.Series([x.year, x.month])))
 
-data_cat.drop('Date', axis=1, inplace=True)
+data_cat = data_cat.drop('Date', axis=1)
 
 data_cat[['Year', 'Month']] = data_cat[['Year', 'Month']].astype(str)
 
