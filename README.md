@@ -1,9 +1,9 @@
 # Machine Learning: Fundamentals and Applications
 
 ## Про курс
-Цей курс — частина програми EU магістратури Neoversity, спеціалізація Data Science & Data Analytics.
+Цей курс — базовий у програмі EU магістратури Neoversity для трьох спеціалізацій: Software Engineering and Artificial Intelligence, Artificial Intelligence and Machine Learning та Cybersecurity and Artificial Intelligence.
 </br>
-Ознайомитись з повною магістерською програмою Data Science & Data Analytics та дізнатись більше про онлайн-навчання для IT-фахівців можна [тут](https://i.goit.global/Juqlh).
+Ознайомитись з описом кожної спеціалізації та дізнатись більше про онлайн-навчання для IT-фахівців можна за посиланнями: [SE & AI](https://drive.google.com/file/d/12BrooGfhaaxwHO05KuAh3sazzyRHYIAZ/view), [AI & ML](https://drive.google.com/file/d/1DK5lodCgmRkv01Gg-KF7lkU2KB_pSbVp/view), [Cybersecurity & AI](https://drive.google.com/file/d/15gxWi9va5zJXp1aCTmS_kumKAsETsjGZ/view).
 
 ## Автор курсу
 Володимир Голомб : : [LinkedIn](https://www.linkedin.com/in/vholomb) : : [Medium](https://medium.com/@wldmrgml) : : [GitHub](https://github.com/woldemarg)

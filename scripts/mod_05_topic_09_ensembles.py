@@ -126,7 +126,6 @@ prd_bag_knn = predict_with_measure(mod_bag_knn, X_test, y_test)
 # %%
 
 mod_ada_bst = (AdaBoostClassifier(
-    # algorithm='SAMME',
     random_state=42)
     .fit(X_res, y_res))
 
